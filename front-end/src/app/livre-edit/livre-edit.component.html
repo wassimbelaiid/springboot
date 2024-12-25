@@ -1,0 +1,29 @@
+<h2 class="text-center my-4">Édition d'un Livre</h2>
+<div class="container">
+  <form [formGroup]="livreForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="isbn" class="form-label">ISBN</label>
+      <input id="isbn" formControlName="isbn" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input id="titre" formControlName="titre" class="form-control" required>
+    </div>
+    <div formGroupName="auteur">
+      <div class="mb-3">
+        <label for="auteurId" class="form-label">Auteur ID</label>
+        <input id="auteurId" formControlName="id" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="nom" class="form-label">Nom de l'Auteur</label>
+        <input id="nom" formControlName="nom" class="form-control" required readonly>
+      </div>
+      <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom de l'Auteur</label>
+        <input id="prenom" formControlName="prenom" class="form-control" readonly>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a routerLink="/livres" class="btn btn-secondary">Annuler</a>
+  </form>
+</div>

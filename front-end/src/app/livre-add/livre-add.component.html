@@ -1,0 +1,45 @@
+<form [formGroup]="livreForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="isbn" class="form-label">ISBN</label>
+    <input id="isbn" formControlName="isbn" class="form-control" />
+    <div *ngIf="livreForm.get('isbn')?.invalid && livreForm.get('isbn')?.touched" class="text-danger">
+      <small>L'ISBN est requis.</small>
+    </div>
+    
+    </div>
+  
+
+  <div class="mb-3">
+    <label for="titre" class="form-label">Titre</label>
+    <input id="titre" formControlName="titre" class="form-control" />
+    <div *ngIf="livreForm.get('titre')?.invalid && livreForm.get('titre')?.touched" class="text-danger">
+      <small>Le titre est requis.</small>
+    </div>
+  </div>
+
+  <div formGroupName="auteur" class="mb-3">
+    <label for="auteurId" class="form-label">Auteur</label>
+    <select id="auteurId" formControlName="id" class="form-select">
+      <option value="" disabled selected>Sélectionnez un auteur</option>
+      <option *ngFor="let auteur of auteurs" [value]="auteur.id">{{ auteur.nom }} {{ auteur.prenom }}</option>
+    </select>
+    <div *ngIf="livreForm.get('auteur.id')?.invalid && livreForm.get('auteur.id')?.touched" class="text-danger">
+      <small>L'ID de l'auteur est requis.</small>
+    </div>
+  </div>
+  
+
+  <div formGroupName="categorie" class="mb-3">
+    <label for="categorieId" class="form-label">Catégorie</label>
+    <select id="categorieId" formControlName="id" class="form-select">
+      <option value="" disabled selected>Sélectionnez une catégorie</option>
+      <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.nom }}</option>
+    </select>
+    <div *ngIf="livreForm.get('categorie.id')?.invalid && livreForm.get('categorie.id')?.touched" class="text-danger">
+      <small>La catégorie est requise.</small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Ajouter Livre</button>
+  
+</form>

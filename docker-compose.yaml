@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  front-end:
+    build:
+      context: ./front-end
+    ports:
+      - "4200:80"
+    depends_on:
+      - back-end
+
+  back-end:
+    build:
+      context: ./back-end
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/<database_name>
+      SPRING_DATASOURCE_USERNAME: <username>
+      SPRING_DATASOURCE_PASSWORD: <password>
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: mysql_container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: <password>
+      MYSQL_DATABASE: <database_name>
+      MYSQL_USER: <username>
+      MYSQL_PASSWORD: <password>
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_container
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
